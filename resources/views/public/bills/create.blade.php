@@ -12,23 +12,34 @@
                 <form method="POST" action="{{ route('bills.store') }}">
 
                     {{ csrf_field() }}
+
                     <div class="form-group">
                         <label for="date">Date</label>
-                        <input class="form-control" type="text" id="date" name="date">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="date" name="date">
+                        </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="sum">Sum</label>
-                        <input class="form-control" type="text" id="sum" name="sum">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="sum" name="sum">
+                            <div class="input-group-append">
+                                <span class="input-group-text">BYN</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="tag">Tag</label>
-                        <select class="custom-select" name="tag">
-                            @foreach($tags as $tag)
-                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
+                        <div class="input-group">
+                            <select class="custom-select" name="tag">
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <input type="submit" value="Submit" class="btn btn-success">

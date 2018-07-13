@@ -12,15 +12,24 @@
                 <form method="POST" action="{{ route('bills.update', ['id' => $bill->id]) }}">
 
                     {{ csrf_field() }}
+
                     {{method_field('put')}}
+
                     <div class="form-group">
                         <label for="date">Date</label>
-                        <input class="form-control" type="text" id="date" name="date" value="{{ $bill->date }}">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="date" name="date" value="{{ $bill->date }}">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="sum">Sum</label>
-                        <input class="form-control" type="text" id="sum" name="sum" value="{{ $bill->sum }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="sum" name="sum" value="{{ $bill->sum }}">
+                            <div class="input-group-append">
+                                <span class="input-group-text">BYN</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
