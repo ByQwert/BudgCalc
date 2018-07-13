@@ -32,4 +32,8 @@ class User extends Authenticatable
     public function bills() {
         return $this->hasMany(Bill::class);
     }
+
+    public function totalSum() {
+        return $this->bills->sum('sum');
+    }
 }

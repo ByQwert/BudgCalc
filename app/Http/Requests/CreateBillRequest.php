@@ -26,7 +26,7 @@ class CreateBillRequest extends FormRequest
     {
         return [
             'date' => 'required|date',
-            'sum' => 'required|numeric|min:0',
+            'sum' => 'required|numeric|min:0|max:999999',
             'tag' => 'required|integer|exists:tags,id'
         ];
     }

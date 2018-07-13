@@ -5,7 +5,8 @@
 
         @include('partial.success')
 
-        <a class="btn btn-success" href="{{ route('bills.create') }}">Create</a>
+        <p></p>
+        <p>Total: {{ $totalSum }}</p>
         
         <table class="table table-hover">
             <thead>

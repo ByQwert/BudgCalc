@@ -28,9 +28,11 @@ class BillController extends Controller
         // Only owned bills
         $user_id = Auth::user()->id;
         $bills = User::find($user_id)->bills()->get();
+        $totalSum = User::find($user_id)->totalSum();
         return view('public.bills.index', [
             'bills' => $bills,
             'billCounter' => 0,
+            'totalSum' => $totalSum,
         ]);
     }
 
