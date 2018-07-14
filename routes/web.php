@@ -23,3 +23,7 @@ Route::resource('bills', 'BillController');
 
 Route::get('debug', 'DebugController@index')->name('debug');
 
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function (){
+    Route::get('/', 'AdminController@index');
+});
+

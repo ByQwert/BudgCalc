@@ -17,6 +17,9 @@
                     You are logged in!
                         <br />
                         <a class="btn btn-primary" href="{{ route('bills.index') }}">Bills</a>
+                        {{--@if($isAdmin)--}}
+                            {{--Admin--}}
+                        {{--@endif--}}
                 </div>
             </div>
         </div>

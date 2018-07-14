@@ -36,4 +36,8 @@ class User extends Authenticatable
     public function totalSum() {
         return $this->bills->sum('sum');
     }
+
+    public function isAdmin() {
+        return $this->is_admin;
+    }
 }
