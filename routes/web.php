@@ -23,7 +23,17 @@ Route::resource('bills', 'BillController');
 
 Route::get('debug', 'DebugController@index')->name('debug');
 
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function (){
-    Route::get('/', 'AdminController@index');
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth','admin']], function (){
+    Route::get('/', 'AdminController@index')->name('admin.admin');
+    Route::resource('bills', 'BillController')->names([
+        'index'=>'admin.bills.index',
+        'show'=>'admin.bills.show',
+        'destroy'=>'admin.bills.destroy',
+        'update'=>'admin.bills.update',
+        'edit'=>'admin.bills.edit',
+    ])->except([
+        'store',
+        'create'
+    ]);
 });
 

@@ -8,9 +8,9 @@ use App\Http\Middleware\AdminMiddleware;
 
 class AdminController extends Controller
 {
-    public function __construct() {
-        $this->middleware(AdminMiddleware::class);
-    }
+//    public function __construct() {
+//        $this->middleware(AdminMiddleware::class);
+//    }
 
     public function index() {
         return view('public.admin.admin', [
