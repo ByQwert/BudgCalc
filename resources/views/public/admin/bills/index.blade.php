@@ -5,6 +5,8 @@
 
         @include('partial.success')
 
+        {{--<p>Total: {{ $totalSum }}</p>--}}
+
         <table class="table table-hover">
             <thead>
             <tr>
