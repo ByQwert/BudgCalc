@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('bills/chart', 'BillController@chart')->name('bills/chart')->middleware('auth');
 Route::resource('bills', 'BillController');
 
 Route::get('debug', 'DebugController@index')->name('debug');
@@ -35,5 +36,6 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth','ad
         'store',
         'create'
     ]);
+    Route::get('users', 'UserController@index');
 });
 
