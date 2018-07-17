@@ -48,5 +48,42 @@
                 @endif
             </tbody>
         </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        <canvas id="myChart" width="400px" height="400px"></canvas>
+        <script>
+            var url = "{{ route('bills/chart') }}";
+            var Days = new Array();
+            var Labels = new Array();
+            var Sum = new Array();
+            $(document).ready(function(){
+                $.get(url, function(response){
+                    response.forEach(function(data){
+                        Days.push(data.date);
+                        Sum.push(data.sum);
+                    });
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels:Days,
+                            datasets: [{
+                                label: 'Infosys Price',
+                                data: Sum,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
 @endsection
