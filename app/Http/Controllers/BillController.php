@@ -9,8 +9,6 @@ use App\Models\Tag;
 use App\Models\User;
 use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Helper\Table;
-use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
@@ -26,8 +24,6 @@ class BillController extends Controller
      */
     public function index()
     {
-//        $bills = Bill::all();
-        // Only owned bills
         $user_id = Auth::user()->id;
         $bills = User::find($user_id)->bills()->get();
         $totalSum = User::find($user_id)->totalSum();
@@ -61,7 +57,6 @@ class BillController extends Controller
     public function store(CreateBillRequest $request)
     {
         $bill = Bill::create([
-//            $request->all(),
             'date' => $request->get('date'),
             'sum' => $request->get('sum'),
             'tag_id' => $request->get('tag'),
@@ -149,22 +144,5 @@ class BillController extends Controller
 
         session()->flash('flash_message', 'Bill deleted');
         return redirect()->back();
-    }
-
-    public function chart() {
-        $user_id = Auth::user()->id;
-        $bills =  DB::table('bills')->select('date', 'sum')->where('user_id', $user_id)->get();
-        $dateSum = $bills->sortBy('date')->groupBy('date')->map(function ($row, $key) {
-            return $row->sum('sum');
-        });
-        $result = collect([]);
-        foreach ($dateSum as $key => $value) {
-            $newObject = (object) [
-                'date' => $key,
-                'sum' => $value,
-            ];
-            $result->push($newObject);
-        }
-        return response()->json($result);
     }
 }

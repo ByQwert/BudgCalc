@@ -19,7 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('bills/chart', 'BillController@chart')->name('bills/chart')->middleware('auth');
+Route::group(['prefix'=>'bills/chart', 'middleware'=>['auth']], function() {
+   Route::get('fullDate', 'ChartController@fullDate')->name('fullDate');
+    Route::get('tag', 'ChartController@tag')->name('tag');
+});
 Route::resource('bills', 'BillController');
 
 Route::get('debug', 'DebugController@index')->name('debug');

@@ -48,28 +48,46 @@
                 @endif
             </tbody>
         </table>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-        <canvas id="myChart" width="400px" height="400px"></canvas>
         <script>
-            var url = "{{ route('bills/chart') }}";
+            function random_rgba() {
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+            }
+        </script>
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="fullDateChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="tagChart"></canvas>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+        <script>
+            var fullDateUrl = "{{ route('fullDate') }}";
             var Days = new Array();
-            var Labels = new Array();
-            var Sum = new Array();
+            var fullDateSums = new Array();
+            var fullDateColors = [];
             $(document).ready(function(){
-                $.get(url, function(response){
+                $.get(fullDateUrl, function(response){
                     response.forEach(function(data){
                         Days.push(data.date);
-                        Sum.push(data.sum);
+                        fullDateSums.push(data.sum);
+                        fullDateColors.push(random_rgba());
                     });
-                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var ctx = document.getElementById("fullDateChart").getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
                             labels:Days,
                             datasets: [{
-                                label: 'Infosys Price',
-                                data: Sum,
-                                borderWidth: 1
+                                label: 'Date stats',
+                                data: fullDateSums,
+                                borderWidth: 1,
+                                backgroundColor: fullDateColors
                             }]
                         },
                         options: {
@@ -79,8 +97,36 @@
                                         beginAtZero:true
                                     }
                                 }]
-                            }
+                            },
                         }
+                    });
+                });
+            });
+        </script>
+        <script>
+            var tagUrl = "{{ route('tag') }}";
+            var Tags = new Array();
+            var tagSums = new Array();
+            var tagColors = [];
+            $(document).ready(function() {
+                $.get(tagUrl, function (response) {
+                    response.forEach(function (data) {
+                        Tags.push(data.tag);
+                        tagSums.push(data.sum);
+                        tagColors.push(random_rgba());
+                    });
+                    var ctx = document.getElementById("tagChart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels:Tags,
+                            datasets: [{
+                                label: 'Tag stats',
+                                data: tagSums,
+                                borderWidth: 1,
+                                backgroundColor: tagColors
+                            }]
+                        },
                     });
                 });
             });
