@@ -29,7 +29,6 @@ class ChartController extends Controller
 
     public function tag() {
         $user_id = Auth::user()->id;
-//        $bills =  DB::table('bills')->select('tag_id', 'sum')->where('user_id', $user_id)->get();
         $bills = Bill::with('tag')->where('user_id', 1)->get();
         $tagSum = $bills->sortBy('tag.name')->groupBy('tag.name')->map(function ($row, $key) {
            return $row->sum('sum');

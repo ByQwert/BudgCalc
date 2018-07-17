@@ -13,7 +13,7 @@ class AdminController extends Controller
 //    }
 
     public function index() {
-        return view('public.admin.admin', [
+        return view('public.admin.index', [
 
         ]);
     }

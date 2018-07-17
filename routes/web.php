@@ -19,16 +19,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// User
 Route::group(['prefix'=>'bills/chart', 'middleware'=>['auth']], function() {
    Route::get('fullDate', 'ChartController@fullDate')->name('fullDate');
     Route::get('tag', 'ChartController@tag')->name('tag');
 });
 Route::resource('bills', 'BillController');
 
-Route::get('debug', 'DebugController@index')->name('debug');
-
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth','admin']], function (){
-    Route::get('/', 'AdminController@index')->name('admin.admin');
+// Admin
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth','admin']], function () {
+    Route::get('/', 'AdminController@index')->name('admin.index');
     Route::resource('bills', 'BillController')->names([
         'index'=>'admin.bills.index',
         'show'=>'admin.bills.show',
@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth','ad
         'store',
         'create'
     ]);
-    Route::get('users', 'UserController@index');
+    Route::get('users', 'UserController@index')->name('admin.users.index');
 });
+
+Route::get('debug', 'DebugController@index')->name('debug');
 

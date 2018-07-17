@@ -55,7 +55,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (\Illuminate\Support\Facades\Auth::user()->isAdmin())
-                                        <a class="dropdown-item" href="{{ route('admin.admin') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
                                             Admin
                                         </a>
                                     @endif

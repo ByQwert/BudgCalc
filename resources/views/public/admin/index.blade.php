@@ -14,6 +14,7 @@
                             </div>
                         @endif
                         <a class="btn btn-primary" href="{{ route('admin.bills.index') }}">Bills</a>
+                        <a class="btn btn-primary" href="{{ route('admin.users.index') }}">Users</a>
                     </div>
                 </div>
             </div>
