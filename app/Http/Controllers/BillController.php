@@ -137,12 +137,14 @@ class BillController extends Controller
     public function destroy($id)
     {
         $bill = Bill::findOrFail($id);
+        $bill->delete();
+        return response()->json($bill);
 
-        if(!$bill->delete()) {
-            return redirect()->back()->withErrors('Delete error');
-        }
+//        if(!$bill->delete()) {
+//            return redirect()->back()->withErrors('Delete error');
+//        }
 
-        session()->flash('flash_message', 'Bill deleted');
-        return redirect()->back();
+//        session()->flash('flash_message', 'Bill deleted');
+//        return redirect()->back();
     }
 }
